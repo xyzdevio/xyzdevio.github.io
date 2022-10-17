@@ -39,9 +39,7 @@ jobs:
       id: readme
       run: |
         content=`cat README.md`
-        sed "s|\/|\\\/|g" <(echo 
-        list='${{ env.the_list }}'
-        replace="(<!-- PROJECT LIST_BEGIN -->)\\(.*\\)(<!-- PROJECT LIST_END -->)"
+        replace="\(<!-- PROJECT LIST_BEGIN -->\)\\(.*\\)\(<!-- PROJECT LIST_END -->\)"
         replacewith="<!-- PROJECT LIST_BEGIN -->\$\(sed \"s|\/|\\\/|g\" <\(echo \"\$\{\{ env.the_list \}\}\"\)\)<-- PROJECT LIST_END --!>"
         sed "s|$replace|${replacewith}|" <(echo $content) > README.md
         cat README.md
