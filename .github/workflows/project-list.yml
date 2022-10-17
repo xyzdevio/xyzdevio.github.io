@@ -44,7 +44,7 @@ jobs:
         sed "s|$replace|${replacewith}|" <(echo $content) > README.md
         cat README.md
         echo "here"
-        diff_var=$(git diff --exit-code)
+        diff_var=$(git diff --cached --name-only --quiet)
         echo "here1"
         has_diff=$(diff_var==1)
         echo "here2"
