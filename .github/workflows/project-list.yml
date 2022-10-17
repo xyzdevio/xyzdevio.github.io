@@ -24,13 +24,12 @@ jobs:
         obj=json.load(sys.stdin)
         list=\"\"
         for item in obj:
-          print(item[\"name\"])
           list=list+\"\" + item[\"created_at\"][:10] + \" : [\" + item[\"name\"] + \"](./\" + item[\"name\"] + \")<br/><br/>\"
         print(list)
         ")
 
-        echo ${THE_LIST}
-        echo "the_list=$THE_LIST" >> $GITHUB_ENV
+        echo $THE_LIST
+        echo "the_list=THE_LIST" >> $GITHUB_ENV
     
     - name: fixing readme
       id: readme
