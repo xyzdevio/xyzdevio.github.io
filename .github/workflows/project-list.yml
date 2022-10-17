@@ -39,8 +39,8 @@ jobs:
       id: readme
       run: |
         content=`cat README.md`
-        replace="<!-- PROJECT LIST_BEGIN -->*<!-- PROJECT LIST_END -->"
-        replacewith="<!-- PROJECT LIST_BEGIN -->${{ env.the_list }}<!-- PROJECT LIST_END -->"
+        replace="(<!-- PROJECT LIST_BEGIN -->)(.*)(<!-- PROJECT LIST_END -->)"
+        replacewith="(<!-- PROJECT LIST_BEGIN -->)(${{ env.the_list }})(<!-- PROJECT LIST_END -->)"
         content=$(sed "s/$replace/$replacewith/" <<< "$content")
         content > README.md
         cat content
