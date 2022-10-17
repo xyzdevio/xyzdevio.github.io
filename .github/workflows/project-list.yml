@@ -39,11 +39,10 @@ jobs:
       id: readme
       run: |
         content=`cat README.md`
-        replace="(<!-- PROJECT LIST_BEGIN -->)(.*)(<!-- PROJECT LIST_END -->)"
-        replacewith="(<!-- PROJECT LIST_BEGIN -->)(${{ env.the_list }})(<!-- PROJECT LIST_END -->)"
-        content=$(sed -i "s/${replace}/${replacewith}/" <<< "$content")
-        content > README.md
-        cat content
+        replace="(<!-- PROJECT LIST_BEGIN -->)\\(.*\\)(<!-- PROJECT LIST_END -->)"
+        replacewith="<!-- PROJECT LIST_BEGIN -->${{ env.the_list }}<-- PROJECT LIST_END --!>"
+        sed "s|$replace|${replacewith}|" <(echo $content) > README.md
+        cat README.md
         diff_var= ${git diff --name-only HEAD^..HEAD}
 
         echo $diff_var
