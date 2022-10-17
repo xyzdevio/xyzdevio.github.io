@@ -44,26 +44,9 @@ jobs:
           regex: true
           include: README.md
 
-    - name: overwrite readme
-      id: check-if-diff
-      run: |
-        #content=`cat README.md`
-        #replace="\(<!-- PROJECT LIST_BEGIN -->\)\\(.*\\)\(<!-- PROJECT LIST_END -->\)"
-        #replacewith="<!-- PROJECT LIST_BEGIN -->\$\(sed \"s|\/|\\\/|g\" <\(echo \"\$\{\{ env.the_list \}\}\"\)\)<-- PROJECT LIST_END --!>"
-        #sed "s|$replace|${replacewith}|" <(echo $content) > README.md
-        cat README.md
-        diff_var=$(git diff --cached --name-only --quiet)
-        has_diff=$(diff_var==1)
-        echo $has_diff
-
-        echo "has_diff=$has_diff" >> $GITHUB_ENV
-
-    - name: Save overwrite if needed
-      id: save
-      if: ${{env.has_diff}}
-      uses: devops-infra/action-commit-push@v0.9.0
+    - name: Push changes
+      uses: ad-m/github-push-action@v0.6.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        commit_message: Update projects list
-
+        branch: ${{ github.ref }}
 
