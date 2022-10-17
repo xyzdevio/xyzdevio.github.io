@@ -42,6 +42,7 @@ jobs:
           find: "(<!-- PROJECT LIST_BEGIN -->)(.*)(<!-- PROJECT LIST_END -->)"
           replace: "<!-- PROJECT LIST_BEGIN -->${{ env.the_list }}<-- PROJECT LIST_END --!>"
           regex: true
+          include: README.md
 
     - name: overwrite readme
       id: check-if-diff
@@ -51,13 +52,10 @@ jobs:
         #replacewith="<!-- PROJECT LIST_BEGIN -->\$\(sed \"s|\/|\\\/|g\" <\(echo \"\$\{\{ env.the_list \}\}\"\)\)<-- PROJECT LIST_END --!>"
         #sed "s|$replace|${replacewith}|" <(echo $content) > README.md
         cat README.md
-        echo "here"
         diff_var=$(git diff --cached --name-only --quiet)
-        echo "here1"
         has_diff=$(diff_var==1)
-        echo "here2"
+        echo $has_diff
 
-        echo $diff_var
         echo "has_diff=$has_diff" >> $GITHUB_ENV
 
     - name: Save overwrite if needed
