@@ -39,7 +39,7 @@ jobs:
       id: readme
       uses: jacobtomlinson/gha-find-replace@v2
       with:
-          find: "\\\(<!-- PROJECT LIST_BEGIN -->\\\)\\\(.*\\\)\\\(<!-- PROJECT LIST_END -->\\\)"
+          find: "\\(<!-- PROJECT LIST_BEGIN -->\\)\\(.*\\)\\(<!-- PROJECT LIST_END -->\\)"
           replace: "<!-- PROJECT LIST_BEGIN -->${{ env.the_list }}<-- PROJECT LIST_END --!>"
           regex: true
           include: README.md
