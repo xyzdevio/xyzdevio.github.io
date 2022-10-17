@@ -25,7 +25,7 @@ jobs:
         list=\"\"
         for item in obj:
           list+=\"\" + item[\"created_at\"][:10] + \" : [\" + item[\"name\"] + \"](/\" + item[\"name\"] + \")\n\n\"
-        print list
+        print(list)
         ")
 
         echo "::set-output name=the_list::${THE_LIST}"
