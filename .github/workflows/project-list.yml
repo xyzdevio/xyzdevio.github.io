@@ -35,6 +35,10 @@ jobs:
       with:
           fetch-depth: 2
 
+    - name: list
+      run: |
+        echo "${{ env.the_list }}"
+
     - name: cat 1
       run: |
         echo "1"
