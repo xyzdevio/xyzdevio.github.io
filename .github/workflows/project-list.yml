@@ -29,7 +29,6 @@ jobs:
         ")
 
         echo "::set-output name=the_list::${THE_LIST}"
-      outputs: the_list: ${{ steps.project_list.outputs.the_list }}
     
     - name fixing readme
       id: readme
