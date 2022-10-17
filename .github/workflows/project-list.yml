@@ -30,7 +30,7 @@ jobs:
 
         echo "::set-output name=the_list::${THE_LIST}"
     
-    - name fixing readme
+    - name: fixing readme
       id: readme
       needs: project_list
       run: |
