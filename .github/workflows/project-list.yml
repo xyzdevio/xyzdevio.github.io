@@ -37,11 +37,19 @@ jobs:
 
     - name: overwrite readme
       id: readme
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+          find: "\(<!-- PROJECT LIST_BEGIN -->\)\(.*\)\(<!-- PROJECT LIST_END -->\)"
+          replace: "<!-- PROJECT LIST_BEGIN -->${{ env.the_list }}<-- PROJECT LIST_END --!>"
+          regex: true
+
+    - name: overwrite readme
+      id: readme
       run: |
-        content=`cat README.md`
-        replace="\(<!-- PROJECT LIST_BEGIN -->\)\\(.*\\)\(<!-- PROJECT LIST_END -->\)"
-        replacewith="<!-- PROJECT LIST_BEGIN -->\$\(sed \"s|\/|\\\/|g\" <\(echo \"\$\{\{ env.the_list \}\}\"\)\)<-- PROJECT LIST_END --!>"
-        sed "s|$replace|${replacewith}|" <(echo $content) > README.md
+        #content=`cat README.md`
+        #replace="\(<!-- PROJECT LIST_BEGIN -->\)\\(.*\\)\(<!-- PROJECT LIST_END -->\)"
+        #replacewith="<!-- PROJECT LIST_BEGIN -->\$\(sed \"s|\/|\\\/|g\" <\(echo \"\$\{\{ env.the_list \}\}\"\)\)<-- PROJECT LIST_END --!>"
+        #sed "s|$replace|${replacewith}|" <(echo $content) > README.md
         cat README.md
         echo "here"
         diff_var=$(git diff --cached --name-only --quiet)
