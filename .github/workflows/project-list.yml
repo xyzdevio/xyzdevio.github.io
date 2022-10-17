@@ -38,7 +38,7 @@ jobs:
     - name: overwrite readme
       id: readme
       run: |
-        content="$(< README.md)"
+        content=`cat README.md`
         replace="<!-- PROJECT LIST_BEGIN -->*<!-- PROJECT LIST_END -->"
         replacewith="<!-- PROJECT LIST_BEGIN -->${{ env.the_list }}<!-- PROJECT LIST_END -->"
         content="${content/${replace}/${replacewith}}"
