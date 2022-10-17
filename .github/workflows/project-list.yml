@@ -25,7 +25,7 @@ jobs:
         list=\"\"
         for item in obj:
           print(item[\"name\"])
-          list=list+\"\" + item[\"created_at\"][:10] + \" : [\" + item[\"name\"] + \"](./\" + item[\"name\"] + \")\"
+          list=list+\"\" + item[\"created_at\"][:10] + \" : [\" + item[\"name\"] + \"](./\" + item[\"name\"] + \")<br/><br/>\"
         print(list)
         ")
 
