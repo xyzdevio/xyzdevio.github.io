@@ -44,7 +44,7 @@ jobs:
           regex: true
 
     - name: overwrite readme
-      id: readme
+      id: check diff
       run: |
         #content=`cat README.md`
         #replace="\(<!-- PROJECT LIST_BEGIN -->\)\\(.*\\)\(<!-- PROJECT LIST_END -->\)"
