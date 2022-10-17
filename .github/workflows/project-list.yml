@@ -35,6 +35,11 @@ jobs:
       with:
           fetch-depth: 2
 
+    - name: cat 1
+      run: |
+        echo "1"
+        cat README.md
+
     - name: overwrite readme
       id: readme
       uses: jacobtomlinson/gha-find-replace@v2
@@ -43,6 +48,11 @@ jobs:
           replace: "<!-- PROJECT LIST_BEGIN -->${{ env.the_list }}<-- PROJECT LIST_END --!>"
           regex: true
           include: README.md
+
+    - name: cat 2
+      run: |
+        echo "2"
+        cat README.md
 
     - name: Push changes
       uses: ad-m/github-push-action@v0.6.0
