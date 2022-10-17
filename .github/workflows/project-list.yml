@@ -43,7 +43,7 @@ jobs:
         replacewith="<!-- PROJECT LIST_BEGIN -->${{ env.the_list }}<-- PROJECT LIST_END --!>"
         sed "s|$replace|${replacewith}|" <(echo $content) > README.md
         cat README.md
-        diff_var= ${git diff --name-only HEAD^..HEAD}
+        diff_var=${git diff --name-only HEAD^..HEAD}
 
         echo $diff_var
         echo "diff_var=$diff_var" >> $GITHUB_ENV
