@@ -43,14 +43,15 @@ jobs:
         replacewith="<!-- PROJECT LIST_BEGIN -->${{ env.the_list }}<-- PROJECT LIST_END --!>"
         sed "s|$replace|${replacewith}|" <(echo $content) > README.md
         cat README.md
-        diff_var=${git diff --name-only HEAD^..HEAD}
+        diff_var=$(git diff --exit-code)
+        has_diff=$(diff_var==1)
 
         echo $diff_var
-        echo "diff_var=$diff_var" >> $GITHUB_ENV
+        echo "has_diff=$has_diff" >> $GITHUB_ENV
 
     - name: Save overwrite if needed
       id: save
-      if: ${{env.diff_var}}
+      if: ${{env.has_diff}}
       uses: devops-infra/action-commit-push@v0.9.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
