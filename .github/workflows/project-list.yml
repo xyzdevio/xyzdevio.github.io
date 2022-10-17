@@ -29,9 +29,9 @@ jobs:
         print(list)
         ")
 
-        echo "::set-output name=the_list::${THE_LIST}"
+        echo "{THE_LIST}={the_list}" >> $GITHUB_ENV
     
     - name: fixing readme
       id: readme
       run: |
-        echo "${{ steps.project_list.outputs.the_list }}"
+        echo "${{ env.the_list }}"
