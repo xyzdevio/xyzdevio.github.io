@@ -33,4 +33,4 @@ jobs:
     - name: fixing readme
       id: readme
       run: |
-        echo "${{ project_list.outputs.the_list }}"
+        echo "${{ steps.project_list.outputs.the_list }}"
