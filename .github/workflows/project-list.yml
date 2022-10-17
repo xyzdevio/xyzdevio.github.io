@@ -5,7 +5,7 @@ on:
     branches:
 
 jobs:
-  check-dist:
+  update-project-list:
     runs-on: ubuntu-latest
   
     steps:
@@ -30,8 +30,31 @@ jobs:
 
         echo $THE_LIST
         echo "the_list=$THE_LIST" >> $GITHUB_ENV
-    
-    - name: fixing readme
+   
+    - uses: actions/checkout@v3
+      with:
+          fetch-depth: 2
+
+    - name: overwrite readme
       id: readme
       run: |
-        echo "${{ env.the_list }}"
+        content=${cat README.md}
+        replace="<!-- PROJECT LIST_BEGIN -->*<!-- PROJECT LIST_END -->"
+        replacewith="<!-- PROJECT LIST_BEGIN -->${{ env.the_list }}<!-- PROJECT LIST_END -->"
+        content="${content/${replace}/${replacewith}}"
+        content > README.md
+        cat content
+        diff_var= ${git diff --name-only HEAD^..HEAD}
+
+        echo $diff_var
+        echo "diff_var=$diff_var" >> $GITHUB_ENV
+
+    - name: Save overwrite if needed
+      id: save
+      if: ${{env.diff_var}}
+      uses: devops-infra/action-commit-push@v0.9.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        commit_message: Update projects list
+
+
