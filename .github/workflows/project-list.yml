@@ -29,7 +29,7 @@ jobs:
         print(list)
         ")
 
-        echo "{THE_LIST}={the_list}" >> $GITHUB_ENV
+        echo "{the_list}={THE_LIST}" >> $GITHUB_ENV
     
     - name: fixing readme
       id: readme
