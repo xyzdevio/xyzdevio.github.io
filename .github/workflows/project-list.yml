@@ -1,0 +1,38 @@
+name: Project List
+
+on:
+  push:
+    branches:
+
+jobs:
+  check-dist:
+    runs-on: ubuntu-latest
+  
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10.8' 
+
+    - name: get the list
+      id: project_list
+      run: |
+        info=$(curl https://api.github.com/users/xyzdevio/repos?sort=created&direction=desc)
+
+        THE_LIST=$(echo $info | python3 -c "import json,sys
+        obj=json.load(sys.stdin)
+        list=\"\"
+        for item in obj:
+          list+=\"\" + item[\"created_at\"][:10] + \" : [\" + item[\"name\"] + \"](/\" + item[\"name\"] + \")\n\n\")
+        echo list
+        ")
+
+        echo "::set-output name=the_list::${THE_LIST}"
+      outputs: the_list: ${{ steps.project_list.outputs.the_list }}
+    
+    - name fixing readme
+      id: readme
+      needs: project_list
+      run: |
+        echo "${{ project_list.outputs.the_list }}"
