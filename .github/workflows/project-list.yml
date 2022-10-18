@@ -22,7 +22,7 @@ jobs:
 
         THE_LIST=$(echo $info | python3 -c "import json,sys
         obj=json.load(sys.stdin)
-        list=\"\"
+        list=\"<br/><br/>\"
         for item in obj:
           list=list + \"\" + item[\"created_at\"][:10] + \" : [\" + item[\"name\"] + \"](./\" + item[\"name\"] + \")<br/><br/>\"
         print(list)
