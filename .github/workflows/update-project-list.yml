@@ -1,0 +1,90 @@
+name: Project List
+
+on:
+  push:
+    branches:
+
+jobs:
+  update-project-list:
+    runs-on: ubuntu-latest
+  
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10.7'
+
+    - name: get the list
+      id: project_list
+      run: |
+        info=$(curl https://api.github.com/users/xyzdevio/repos?sort=created&direction=desc)
+
+        THE_LIST=$(echo $info | python3 -c "import json,sys
+        obj=json.load(sys.stdin)
+        list=\"<br/><br/>\"
+        for item in obj:
+          list=list + \"\" + item[\"created_at\"][:10] + \" : [\" + item[\"name\"] + \"](./\" + item[\"name\"] + \")<br/><br/>\"
+        print(list)
+        ")
+
+        echo $THE_LIST
+        echo "the_list=$THE_LIST" >> $GITHUB_ENV
+   
+    - uses: actions/checkout@v3
+      with:
+          fetch-depth: 2
+
+    - name: list
+      run: |
+        echo "${{ env.the_list }}"
+
+    - name: cat 1
+      run: |
+        echo "1"
+        cat README.md
+
+    - name: replace old list contents
+      run: |
+        str=$(<README.md)
+        echo "str"
+        echo $str
+        substr="<!-- PROJECT LIST_BEGIN -->"
+        substring="<!-- PROJECT LIST_END -->"
+ 
+        prefix=${str%%$substr*}
+        indexone=${#prefix}
+        echo "indexone"
+        echo $indexone
+
+        strtwo=$(<README.md)
+        prefixtwo=${strtwo%%$substring*}
+        indextwo=${#prefixtwo}
+        echo "indextwo"
+        echo $indextwo
+
+        str_begin=${str:0:indexone}
+        str_end=${str:indextwo:}
+
+        echo "begin"
+        echo $str_begin
+        echo "end"
+        echo $str_end
+
+        final="${str_begin}${substr}<br/>${{env.the_list}}<br/>${substring}<br/>${str_end}"
+        echo "final"
+        echo $final
+
+        echo $final >README.md
+
+    - name: cat 2
+      run: |
+        echo "2"
+        cat README.md
+
+    - name: Push changes if any
+      uses: devops-infra/action-commit-push@v0.9.0
+      with:
+        github_token: "${{ secrets.GITHUB_TOKEN }}"
+        commit_message: "[BOT] all them projects"
+
