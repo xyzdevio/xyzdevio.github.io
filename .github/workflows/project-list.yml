@@ -47,7 +47,7 @@ jobs:
     - name: replace old list contents
       run: |
         str=$(<README.md)
-        substr="PROJECT LIST_BEGIN -->"
+        substr="<!-- PROJECT LIST_BEGIN -->"
         substring="<!-- PROJECT LIST_END -->"
  
         prefix=${str%%$substr*}
@@ -66,7 +66,7 @@ jobs:
         echo "end"
         echo $str_end
 
-        final="${str_begin}\\n${{env.the_list}}${str_end}"
+        final="${str_begin}<br/>${{env.the_list}}${str_end}"
         echo "final"
         echo $final
 
