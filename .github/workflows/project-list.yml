@@ -71,7 +71,7 @@ jobs:
         echo "end"
         echo $str_end
 
-        final="${substr}${str_begin}<br/>${{env.the_list}}<br/>${str_end}"
+        final="${str_begin}${substr}<br/>${{env.the_list}}<br/>${str_end}"
         echo "final"
         echo $final
 
