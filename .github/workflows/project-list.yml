@@ -46,7 +46,7 @@ jobs:
 
     - name: replace old list contents
       run: |
-        str=$(<<<README.md)
+        str=$(<README.md)
         substr="PROJECT LIST_BEGIN -->"
         substring="<!-- PROJECT LIST_END -->"
  
@@ -72,15 +72,14 @@ jobs:
 
         echo $final >README.md
 
-
     - name: cat 2
       run: |
         echo "2"
         cat README.md
 
-    - name: Push changes
-      uses: ad-m/github-push-action@v0.6.0
+    - name: Push changes if any
+      uses: devops-infra/action-commit-push@v0.9.0
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }}
+        github_token: "${{ secrets.GITHUB_TOKEN }}"
+        commit_message: "[BOT] all them projects"
 
