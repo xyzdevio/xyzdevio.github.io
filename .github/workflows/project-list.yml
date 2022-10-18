@@ -52,21 +52,25 @@ jobs:
  
         prefix=${str%%$substr*}
         indexone=${#prefix}
+        echo "indexone"
+        echo $indexone
         prefixtwo=${str%%$substring*}
         indextwo=${#prefixtwo}
+        echo "indextwo"
+        echo $indextwo
 
         # offset to inside the <> of the letters
         indexone+=${#substr}
 
         str_begin=${str:0:indexone}
-        str_end=${str:indextwo}
+        str_end=${str:indextwo:}
 
         echo "begin"
         echo $str_begin
         echo "end"
         echo $str_end
 
-        final="${str_begin}<br/>${{env.the_list}}${str_end}"
+        final="${str_begin}<br/>${{env.the_list}}<br/>${str_end}"
         echo "final"
         echo $final
 
