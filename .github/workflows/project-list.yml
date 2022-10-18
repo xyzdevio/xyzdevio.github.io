@@ -46,22 +46,7 @@ jobs:
 
     - name: overwrite attemp
       run: |
-        sed "s/PROJECT LIST_BEGIN -->\(\\n)(.*?\)<!-- PROJECT LIST_END/heyyyyy/" README.md
-
-    - name: cat 1.5
-      run: |
-        echo "1.5"
-        cat README.md
-
-    - name: overwrite readme
-      id: readme
-      uses: jacobtomlinson/gha-find-replace@v2
-      with:
-          find: "<!-- PROJECT LIST_BEGIN -->\\(.*\\)<!-- PROJECT LIST_END -->"
-          replace: "<!-- PROJECT LIST_BEGIN -->hiiii<!-- PROJECT LIST_END -->"
-          regex: true
-          include: README.md
-            #replace: "<!-- PROJECT LIST_BEGIN -->${{ env.the_list }}<!-- PROJECT LIST_END -->"
+        sed "s/PROJECT LIST_BEGIN -->\(\\n\)\(.*?\)<!-- PROJECT LIST_END/heyyyyy/" README.md
 
     - name: cat 2
       run: |
