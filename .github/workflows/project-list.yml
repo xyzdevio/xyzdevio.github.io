@@ -65,6 +65,7 @@ jobs:
 
         # offset to inside the <> of the letters
         indexone+=${#substr}
+        indextwo+=${#substring}
 
         str_begin=${str:0:indexone}
         str_end=${str:indextwo:}
