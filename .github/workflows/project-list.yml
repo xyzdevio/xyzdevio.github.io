@@ -51,15 +51,15 @@ jobs:
         substring="<!-- PROJECT LIST_END -->"
  
         prefix=${str%%$substr*}
-        index1=${#prefix}
+        indexone=${#prefix}
         prefixtwo=${str%%$substring*}
-        index2=${#prefixtwo}
+        indextwo=${#prefixtwo}
 
         # offset to inside the <> of the letters
-        index1 = index1 + ${#substr}
+        indexone = indexone + ${#substr}
 
-        str_begin = ${str:0:index1}
-        str_end = ${str:index2}
+        str_begin = ${str:0:indexone}
+        str_end = ${str:indextwo}
 
         echo "begin"
         echo $str_begin
