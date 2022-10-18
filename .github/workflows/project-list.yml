@@ -63,10 +63,6 @@ jobs:
         echo "indextwo"
         echo $indextwo
 
-        # offset to inside the <> of the letters
-        indexone+=${#substr}
-        indextwo+=${#substring}
-
         str_begin=${str:0:indexone}
         str_end=${str:indextwo:}
 
@@ -75,7 +71,7 @@ jobs:
         echo "end"
         echo $str_end
 
-        final="${str_begin}<br/>${{env.the_list}}<br/>${str_end}"
+        final="${substr}${str_begin}<br/>${{env.the_list}}<br/>${str_end}"
         echo "final"
         echo $final
 
