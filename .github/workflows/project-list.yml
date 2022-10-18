@@ -46,7 +46,7 @@ jobs:
 
     - name: replace old list contents
       run: |
-        str=$(<README.md)
+        str=$(<<<README.md)
         substr="PROJECT LIST_BEGIN -->"
         substring="<!-- PROJECT LIST_END -->"
  
