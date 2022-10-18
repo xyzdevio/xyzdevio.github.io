@@ -44,7 +44,7 @@ jobs:
         echo "1"
         cat README.md
 
-    - name: find and erase old list contents
+    - name: replace old list contents
       run: |
         str=$(<README.md)
         substr="PROJECT LIST_BEGIN -->"
@@ -70,9 +70,8 @@ jobs:
         echo "final"
         echo $final
 
-        #    - name: overwrite attemp
-        #run: |
-        # sed "s/PROJECT LIST_BEGIN -->/PROJECT LIST_BEGIN -->\\n${{env.the_list}}/" README.md
+        echo $final >README.md
+
 
     - name: cat 2
       run: |
