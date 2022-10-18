@@ -47,7 +47,7 @@ jobs:
     - name: overwrite attemp
       run: |
         echo "${{ env.the_list }}"
-        sed "s/PROJECT LIST_BEGIN -->/PROJECT LIST_BEGIN -->heeeyyy/" README.md
+        sed "s/PROJECT LIST_BEGIN -->/PROJECT LIST_BEGIN -->${{env.the_list}}/" README.md
 
     - name: cat 2
       run: |
