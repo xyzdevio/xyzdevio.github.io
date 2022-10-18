@@ -54,7 +54,9 @@ jobs:
         indexone=${#prefix}
         echo "indexone"
         echo $indexone
-        prefixtwo=${str%%$substring*}
+
+        strtwo=$(<README.md)
+        prefixtwo=${strtwo%%$substring*}
         indextwo=${#prefixtwo}
         echo "indextwo"
         echo $indextwo
