@@ -46,7 +46,7 @@ jobs:
 
     - name: find and erase old list contents
       run: |
-        str=${{ cat README.md }}
+        str=${ cat README.md }
         substr="PROJECT LIST_BEGIN -->"
         substring="<!-- PROJECT LIST_END -->"
  
