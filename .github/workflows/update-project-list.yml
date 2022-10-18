@@ -24,7 +24,7 @@ jobs:
         obj=json.load(sys.stdin)
         list=\"<br/><br/>\"
         for item in obj:
-          list=list + \"### \" + item[\"created_at\"][:10] + \" : [\" + item[\"name\"] + \"](./\" + item[\"name\"] + \")<br/><br/>\"
+          list=list + \"<h2>\" + item[\"created_at\"][:10] + \" : [\" + item[\"name\"] + \"](./\" + item[\"name\"] + \")</h2><br/><br/>\"
         print(list)
         ")
 
