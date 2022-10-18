@@ -46,7 +46,7 @@ jobs:
 
     - name: overwrite attemp
       run: |
-        sed "s/<!-- PROJECT LIST_BEGIN -->\(\.\*?\)<!-- PROJECT LIST_END -->/heyyyyy/" README.md
+        sed "s/PROJECT LIST_BEGIN -->\(.*?\)<!-- PROJECT LIST_END/heyyyyy/" README.md
 
     - name: cat 1.5
       run: |
