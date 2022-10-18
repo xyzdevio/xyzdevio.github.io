@@ -24,7 +24,7 @@ jobs:
         obj=json.load(sys.stdin)
         list=\"\"
         for item in obj:
-          list=list+\"\" + item[\"created_at\"][:10] + \" : [\" + item[\"name\"] + \"](./\" + item[\"name\"] + \")<br/><br/>\"
+          list=list+\"\" + item[\"created_at\"][:10] + \" : [\" + item[\"name\"] + \"]\(./\" + item[\"name\"] + \"\)<br\/><br\/>\"
         print(list)
         ")
 
@@ -46,6 +46,7 @@ jobs:
 
     - name: overwrite attemp
       run: |
+        echo "${{ env.the_list }}"
         sed "s/PROJECT LIST_BEGIN -->/PROJECT LIST_BEGIN -->heeeyyy/" README.md
 
     - name: cat 2
