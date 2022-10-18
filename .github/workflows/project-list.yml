@@ -24,7 +24,7 @@ jobs:
         obj=json.load(sys.stdin)
         list=\"\"
         for item in obj:
-          list=list + \"\" + item[\"created_at\"][:10] + \" : [\" + item[\"name\"] + \"]\(.\/\" + item[\"name\"] + \"\)<br\/><br\/>\"
+          list=list + \"\" + item[\"created_at\"][:10] + \" : [\" + item[\"name\"] + \"]\(.\/\" + item[\"name\"] + \"\)\\n\\n\"
         print(list)
         ")
 
@@ -44,10 +44,35 @@ jobs:
         echo "1"
         cat README.md
 
-    - name: overwrite attemp
+    - name: find and erase old list contents
       run: |
-        echo "${{ env.the_list }}"
-        sed "s/PROJECT LIST_BEGIN -->/PROJECT LIST_BEGIN -->\\n${{env.the_list}}/" README.md
+        str=${{ cat README.md }}
+        substr="PROJECT LIST_BEGIN -->"
+        substring="<!-- PROJECT LIST_END -->"
+ 
+        prefix=${str%%$substr*}
+        index1=${#prefix}
+        prefixtwo=${str%%$substring*}
+        index2=${#prefixtwo}
+
+        # offset to inside the <> of the letters
+        index1 = index1 + ${#substr}
+
+        str_begin = ${str:0:index1}
+        str_end = ${str:index2}
+
+        echo "begin"
+        echo $str_begin
+        echo "end"
+        echo $str_end
+
+        final = $str_begin + "\\n${{env.the_list}}" + $str_end
+        echo "final"
+        echo $final
+
+        #    - name: overwrite attemp
+        #run: |
+        # sed "s/PROJECT LIST_BEGIN -->/PROJECT LIST_BEGIN -->\\n${{env.the_list}}/" README.md
 
     - name: cat 2
       run: |
