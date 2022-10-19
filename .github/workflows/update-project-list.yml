@@ -82,9 +82,10 @@ jobs:
         echo "2"
         cat README.md
 
-    - name: Push changes if any
-      uses: devops-infra/action-commit-push@v0.9.0
-      with:
-        github_token: "${{ secrets.GITHUB_TOKEN }}"
-        commit_message: "[BOT] all them projects"
+    - name: push changes if any
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+	    git config --local user.name "github-actions[bot]"
+	    git commit -am "[BOT] all them projects"
+	    git push
 
