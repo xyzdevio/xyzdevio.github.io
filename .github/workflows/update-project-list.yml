@@ -3,6 +3,9 @@ name: Project List
 on:
   push:
     branches:
+  schedule:
+    - cron: '@weekly'
+  workflow_dispatch:
 
 jobs:
   update-project-list:
