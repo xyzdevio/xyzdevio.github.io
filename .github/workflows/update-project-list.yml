@@ -71,7 +71,7 @@ jobs:
         echo "end"
         echo $str_end
 
-        final="${str_begin}${substr}<br/>${{env.the_list}}<br/>${substring}<br/>${str_end}"
+        final="${str_begin}${substr}<br/><h3>${{env.the_list}}</h3><br/>${substring}<br/>${str_end}"
         echo "final"
         echo $final
 
@@ -82,7 +82,14 @@ jobs:
         echo "2"
         cat README.md
 
+    - name: Verify Changed files
+      uses: tj-actions/verify-changed-files@v12
+      id: verify-changed-files
+      with:
+        files: README.md
+
     - name: push changes if any
+      if: steps.verify-changed-files.outputs.files_changed == 'true'
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
